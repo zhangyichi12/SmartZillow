@@ -1,6 +1,6 @@
 from cloudAMQP_client import CloudAMQPClient
 
-CLOUDAMQP_URL = 'amqp://suzvassh:rfX15GwxG-0irniZUlrxhHoHAg5nipBA@hyena.rmq.cloudamqp.com/suzvassh'
+CLOUDAMQP_URL = 'amqp://jnqrsjwd:LSRNXesVFk6BC1mQYclVc2w_7w871XuJ@hyena.rmq.cloudamqp.com/jnqrsjwd'
 QUEUE_NAME = 'test_queue'
 
 # Initialize a client
