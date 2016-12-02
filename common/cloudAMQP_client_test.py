@@ -7,7 +7,7 @@ QUEUE_NAME = 'test_queue'
 client = CloudAMQPClient(CLOUDAMQP_URL, QUEUE_NAME)
 
 # Send a message
-#client.sendDataFetcherTask({'name' : 'test message'})
+client.sendDataFetcherTask({'name' : 'test message'})
 
 
 # Receive a message
