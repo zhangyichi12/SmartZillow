@@ -1,0 +1,6 @@
+python-jsonrpc
+pika
+pymongo
+requests
+lxml
+xmljson
