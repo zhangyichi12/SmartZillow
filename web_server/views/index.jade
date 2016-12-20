@@ -11,10 +11,10 @@ html
       .container-fluid
         .nav.navbar-right
           if logged_in_user
-            form(metdho="get", action="/logout", id="logout")
+            form(method="get", action="/logout", id="logout")
               input(class="btn navbar-btn" value="Log out" type="submit" style="margin-right:120px; margin-top: 40px; font-size:110%; background-color: #4285f4; color: white;")
           else
-            form(metdho="get", action="/login", id="login")
+            form(method  ="get", action="/login", id="login")
               input(class="btn navbar-btn" value="Sign in" type="submit" style="margin-right:120px; margin-top: 40px; font-size:110%; background-color: #4285f4; color: white;")
 
     div(style="margin-top: 10%")

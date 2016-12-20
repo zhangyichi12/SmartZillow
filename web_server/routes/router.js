@@ -13,6 +13,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: TITLE, logged_in_user: user });
 });
 
+/* Search page */
 router.get('/search', function(req, res, next) {
   var query = req.query.search_text;
   console.log("search text: " + query)
@@ -34,6 +35,39 @@ router.get('/search', function(req, res, next) {
       results: results
     });
 
+  });
+});
+
+/* Property detail page*/
+router.get('/detail', function(req, res, next) {
+  logged_in_user = checkLoggedIn(req, res)
+
+  var id = req.query.id
+  console.log("detail for id: " + id)
+
+  rpc_client.getDetailsByZpid(id, function(response) {
+    property = {}
+    if (response === undefined || response === null) {
+      console.log("No results found");
+    } else {
+      property = response;
+    }
+
+    // Add thousands separators for numbers.
+    addThousandSeparator(property);
+
+    // Split facts and additional facts
+    splitFacts(property, 'facts');
+    splitFacts(property, 'additional_facts');
+
+
+    res.render('detail',
+      {
+        title: 'Smart Zillow',
+        query: '',
+        logged_in_user: logged_in_user,
+        property : property
+      });
   });
 });
 
@@ -117,10 +151,19 @@ router.get('/logout', function(req, res) {
 
 function checkLoggedIn(req, res) {
   // Check if session exist
-  if (req.session && req.session.user) { 
+  if (req.session && req.session.user) {
     return req.session.user;
   }
   return null;
+}
+
+function splitFacts(property, field_name) {
+  facts_groups = []
+  group_size = property[field_name].length / 3;
+  facts_groups.push(property[field_name].slice(0, group_size))
+  facts_groups.push(property[field_name].slice(group_size, group_size + group_size))
+  facts_groups.push(property[field_name].slice(group_size + group_size))
+  property[field_name] = facts_groups
 }
 
 function addThousandSeparatorForSearchResult(searchResult) {

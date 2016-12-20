@@ -1,0 +1,3 @@
+import zillow_web_scraper_client as client
+
+client.get_property_by_zpid(48956480)

@@ -1,3 +1,0 @@
-pyjsonrpc
-pika
-pymongo

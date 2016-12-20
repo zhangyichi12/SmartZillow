@@ -1,7 +1,7 @@
 from cloudAMQP_client import CloudAMQPClient
 
 CLOUDAMQP_URL = 'amqp://jnqrsjwd:LSRNXesVFk6BC1mQYclVc2w_7w871XuJ@hyena.rmq.cloudamqp.com/jnqrsjwd'
-QUEUE_NAME = 'test_queue'
+QUEUE_NAME = 'dataFetcherTaskQueue'
 
 # Initialize a client
 client = CloudAMQPClient(CLOUDAMQP_URL, QUEUE_NAME)
@@ -11,4 +11,4 @@ client.sendDataFetcherTask({'name' : 'test message'})
 
 
 # Receive a message
-client.getDataFetcherTask()
+# client.getDataFetcherTask()

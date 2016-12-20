@@ -23,7 +23,7 @@ class CloudAMQPClient:
         method_frame, header_frame, body = self.channel.basic_get(self.queue_name)
         if method_frame:
             print "[x] Received task from dataFetcherTaskQueue: %s" % body
-            self.channel.basic_ack(method_frame.delivery_tag)
+            self.channel.basic_ack(method_frame.delivery_tag) #Tell queue message have been received, and queue can delete the message
             return body
         else:
             print "No message returnning"
