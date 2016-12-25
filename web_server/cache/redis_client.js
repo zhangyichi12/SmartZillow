@@ -6,7 +6,6 @@ client.on("error", function(err) {
 });
 
 function redis_get(key, callback) {
-    console.log("from cache!");
     client.get(key, function(err, res) {
         if(err) {
             console.log("Error key ", key);

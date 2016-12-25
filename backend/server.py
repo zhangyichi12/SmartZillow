@@ -46,9 +46,9 @@ class RequestHandler(pyjsonrpc.HttpRequestHandler):
 
     """Retrieve details by zillow property ID (zpid)"""
     @pyjsonrpc.rpcmethod
-    def getDetailsByZpid(self, zpid):
-        print "getDetailsByZillowId() gets called with zpid=[%s]" % (zpid)
-        return operations.getDetailsByZpid(zpid)
+    def getDetailsByZpid(self, zpid, get_prediction=True):
+        print "getDetailsByZillowId() gets called with zpid=[%s] and get_prediction=[%s]" % (str(zpid), str(get_prediction))
+        return operations.getDetailsByZpid(zpid, get_prediction)
 
 
 # Threading HTTP-Server

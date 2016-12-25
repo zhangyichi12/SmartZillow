@@ -68,6 +68,11 @@ router.get('/detail', function (req, res, next) {
                     property = response;
                 }
 
+                // Handle predicted value
+                var predicted_value = parseInt(property['predicted_value']);
+                var list_price = parseInt(property['list_price']);
+                property['predicted_change'] = ((predicted_value - list_price) / list_price * 100).toFixed(2);
+
                 // Add thousands separators for numbers.
                 addThousandSeparator(property);
 
@@ -87,6 +92,7 @@ router.get('/detail', function (req, res, next) {
             });
         }
         else {
+            console.log("from cache!");
             res.render('detail', {
                 title: 'Smart Zillow',
                 query: '',

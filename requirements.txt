@@ -4,3 +4,7 @@ pymongo
 requests
 lxml
 xmljson
+numpy
+pandas
+IPython
+watchdog

@@ -1,5 +1,7 @@
 import json
+import operations
 import os
+import pyjsonrpc
 import sys
 import time
 
@@ -8,6 +10,7 @@ from bson.json_util import dumps
 # import common package in parent directory
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'common'))
 
+import ml_prediction_client
 import mongodb_client
 import zillow_api_client
 import zillow_web_scraper_client
@@ -20,14 +23,12 @@ PROPERTY_TABLE_NAME = 'property'
 
 """Search a property with specific address and citystatezip"""
 def searchByAddress(address, citystatezip):
-    print "searchByAddress() gets called with address=[%s] and citystatezip=[%s]" % (address, citystatezip)
     res = zillow_api_client.getSearchResults(address, citystatezip)
     print res
     return res
 
 """Search properties by zip code"""
 def searchAreaByZip(zipcode):
-    print "searchAreaByZip() gets called with zipcode=[%s]" % str(zipcode)
     properties = findProperyByZipcode(zipcode)
     if len(properties) == 0:
         properties = zillow_web_scraper_client.search_zillow_by_zip(zipcode)
@@ -36,14 +37,12 @@ def searchAreaByZip(zipcode):
 
 """Search properties by city and state"""
 def searchAreaByCityState(city, state):
-    print "searchAreaByCityState() gets called with city=[%s] abd state=[%s]" % (city, state)
     res = zillow_web_scraper_client.search_zillow_by_city_state(city, state)
     print res
     return res
 
 """Search properties in an area"""
 def searchArea(text):
-    print "search() gets called with text=[%s]" % text
     zpids = []
     if text.isdigit():
         zpids = searchAreaByZip(text)
@@ -69,14 +68,25 @@ def searchArea(text):
     # Trick: use bson.dumps then re-construct json because of ObjectId.
     return json.loads(dumps(res))
 
-"""Retrieve details by zillow property ID (zpid)"""
-def getDetailsByZpid(zpid):
-    print "getDetailsByZillowId() gets called with zpid=[%s]" % zpid
-
+"""
+Retrieve details by zillow property ID (zpid)
+If get_predction is True, get value prediction from ml_prediction_service
+"""
+def getDetailsByZpid(zpid, get_prediction=False):
     db = mongodb_client.getDB()
     prop = json.loads(dumps(db[PROPERTY_TABLE_NAME].find_one({'zpid': zpid})))
     if prop == None:
         prop = zillow_web_scraper_client.get_property_by_zpid(zpid)
+
+    # Get prediction
+    if get_prediction:
+        predicted_value = ml_prediction_client.predict(
+            prop['zipcode'],
+            prop['property_type'],
+            prop['bedroom'],
+            prop['bathroom'],
+            prop['size'])
+        prop['predicted_value'] = int(predicted_value)
     return prop
 
 """Update doc in db"""
