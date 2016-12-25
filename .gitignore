@@ -1,2 +1,2 @@
 /web_server/node_modules/*
-/ENV/*
+/web_server/cache/node_modules/*
