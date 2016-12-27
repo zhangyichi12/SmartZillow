@@ -6,12 +6,10 @@ import time
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'common'))
 
 import mongodb_client
+
 import zillow_web_scraper_client
 
 from cloudAMQP_client import CloudAMQPClient
-
-import socket
-import socks
 
 # RabbitMQ config
 CLOUD_AMQP_URL = '''amqp://jnqrsjwd:LSRNXesVFk6BC1mQYclVc2w_7w871XuJ@hyena.rmq.cloudamqp.com/jnqrsjwd'''
@@ -28,11 +26,6 @@ SECONDS_IN_ONE_WEEK = SECONDS_IN_ONE_DAY * 7
 WAITING_TIME = 3
 
 cloudAMQP_client = CloudAMQPClient(CLOUD_AMQP_URL, DATA_FETCHER_QUEUE_NAME)
-
-def connectTor():
-    socks.set_default_proxy(proxy_type=socks.SOCKS5, addr='localhost', port=9050)
-    socket.socket = socks.socksocket
-    print "Connected to tor"
 
 def handle_message(msg):
     task = json.loads(msg)
@@ -68,7 +61,6 @@ def handle_message(msg):
             cloudAMQP_client.sendDataFetcherTask({'zpid': zpid})
 
 # Main thread
-connectTor()
 while True:
     # fetch a message
     if cloudAMQP_client is not None:

@@ -5,6 +5,9 @@ import requests
 from lxml import html
 from urllib import pathname2url
 
+import socket
+import socks
+
 URL = '''http://www.zillow.com'''
 SEARCH_FOR_SALE_PATH = '''homes/for_sale'''
 GET_PROPERTY_BY_ZPID_PATH = '''homes'''
@@ -38,6 +41,15 @@ with open(USER_AGENTS_FILE, 'rb') as uaf:
         if ua:
             USER_AGENTS.append(ua.strip()[1:-1-1])
 random.shuffle(USER_AGENTS)
+
+def connectTor():
+    socks.set_default_proxy(proxy_type=socks.SOCKS5, addr='localhost', port=9050)
+    socket.socket = socks.socksocket
+    print "Connected to tor"
+
+def closeTor():
+    socket.shutdown(1)
+    print "Close tor"
 
 def build_url(url, path):
     if url[-1] == '/':

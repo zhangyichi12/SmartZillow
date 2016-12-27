@@ -33,13 +33,15 @@ class ReloadModelHandler(FileSystemEventHandler):
 class RequestHandler(pyjsonrpc.HttpRequestHandler):
     """Test method"""
     @pyjsonrpc.rpcmethod
-    def predict(self, zipcode, property_type, bedroom, bathroom, size):
+    def predict(self, zipcode, property_type, bedroom, bathroom, size, longitude, latitude):
         sample = pandas.DataFrame({
             'zipcode': zipcode,
             'property_type': property_type,
             'bedroom': bedroom,
             'bathroom': bathroom,
             'size': size,
+            'longitude': longitude,
+            'latitude': latitude,
             'list_price':0}, index=[0])
         def input_fn_predict():
             return input_fn(sample)

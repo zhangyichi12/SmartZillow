@@ -60,7 +60,7 @@ test_dataframe = property_dataframe.head(1)
 train_features_label = train_dataframe[FEATURE_COLUMNS]
 test_features_label = test_dataframe[FEATURE_COLUMNS]
 
-feature_columns = [zipcode, property_type, bedroom, bathroom, size_buckets]
+# feature_columns = [zipcode, property_type, bedroom, bathroom, size_buckets, longitude, latitude]
 
 linear_regressor = tf.contrib.learn.LinearRegressor(
     feature_columns=feature_columns,
