@@ -85,7 +85,9 @@ def getDetailsByZpid(zpid, get_prediction=False):
             prop['property_type'],
             prop['bedroom'],
             prop['bathroom'],
-            prop['size'])
+            prop['size'],
+            prop['longitude'],
+            prop['latitude'])
         prop['predicted_value'] = int(predicted_value)
     return prop
 

@@ -9,7 +9,7 @@
 6 silly lifecycle week1@0.0.0~prestart: no script for prestart, continuing
 7 info lifecycle week1@0.0.0~start: week1@0.0.0
 8 verbose lifecycle week1@0.0.0~start: unsafe-perm in lifecycle true
-9 verbose lifecycle week1@0.0.0~start: PATH: /Users/yichizhang/.nvm/versions/node/v7.2.0/lib/node_modules/npm/bin/node-gyp-bin:/Users/yichizhang/Desktop/Bittiger_Project/Smart_Zillow/proj/web_server/node_modules/.bin:/Users/yichizhang/Desktop/Bittiger_Project/Smart_Zillow/proj/ENV/bin:/Users/yichizhang/.pyenv/shims:/Users/yichizhang/.pyenv/bin:/Users/yichizhang/.nvm/versions/node/v7.2.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin
+9 verbose lifecycle week1@0.0.0~start: PATH: /Users/yichizhang/.nvm/versions/node/v7.2.0/lib/node_modules/npm/bin/node-gyp-bin:/Users/yichizhang/Desktop/Bittiger_Project/Smart_Zillow/proj/web_server/node_modules/.bin:/Users/yichizhang/.pyenv/shims:/Users/yichizhang/.pyenv/bin:/Users/yichizhang/.nvm/versions/node/v7.2.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/opt/local/bin
 10 verbose lifecycle week1@0.0.0~start: CWD: /Users/yichizhang/Desktop/Bittiger_Project/Smart_Zillow/proj/web_server
 11 silly lifecycle week1@0.0.0~start: Args: [ '-c', 'node ./bin/www' ]
 12 silly lifecycle week1@0.0.0~start: Returned: code: 1  signal: null
