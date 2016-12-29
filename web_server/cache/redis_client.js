@@ -1,11 +1,11 @@
-var redis = require("redis"),
-    client = redis.createClient();
+// var redis = require("redis"),
+//     client = redis.createClient();
 
 var axios = require("axios");
 
-client.on("error", function(err) {
-    console.log("Redis client error " + err);
-});
+// client.on("error", function(err) {
+//     console.log("Redis client error " + err);
+// });
 
 /************call redis service running on local**********
 function redis_get(key, callback) {
@@ -27,7 +27,7 @@ function redis_set(key, property) {
 
 //call redis service running on docker
 function redis_get(key, callback) {
-    axios.get('http://localhost:6060/property', {
+    axios.get('http://192.168.99.100:6060/property', {
         params: {
             key: key
         }
@@ -40,7 +40,7 @@ function redis_get(key, callback) {
 }
 
 function redis_set(key, property) {
-    axios.post('http://localhost:6060/property', {
+    axios.post('http://192.168.99.100:6060/property', {
         key: key,
         property: property
     }).then(function (res) {

@@ -4,7 +4,7 @@ import redis from 'redis';
 import axios from 'axios';
 
 let router = express.Router();
-let client = redis.createClient();
+let client = redis.createClient('6379', '192.168.99.100');
 
 client.on("error", function(err) {
     console.log("Redis client error " + err);
