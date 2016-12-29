@@ -18,7 +18,7 @@ RUN sudo apt-get install -y build-essential
 #RUN cd /redis-stable; make test
 #RUN cd /redis-stable; sudo make install
 
-# 或者 RUN apt-get install -y redis-server
+# 或者 RUN sudo apt-get install -y redis-server
 
 # start redis
 #RUN cd /redis-stable/utils; sudo ./install_server.sh
